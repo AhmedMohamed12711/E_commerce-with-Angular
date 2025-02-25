@@ -44,12 +44,12 @@
             <!-- Authentication Links -->
             <ul class="flex flex-col md:flex-row md:justify-center md:items-center md:space-x-4 space-y-4 md:space-y-0 ml-6">
                 <li *ngIf="isLogin" (click)="_AuthService.logout()" 
-                    class="cursor-pointer text-gray-300 dark:text-gray-200 hover:text-red-600 transition-colors duration-300">
+                    class="cursor-pointer text-gray-300 dark:text-gray-300 hover:text-red-600 transition-colors duration-300">
                     Sign Out
                 </li>
                 <ng-container *ngIf="!isLogin">
-                    <li class="cursor-pointer" routerLink="/login" routerLinkActive="active-link">Login</li>
-                    <li class="cursor-pointer" routerLink="/signup" routerLinkActive="active-link">Register</li>
+                    <li class="cursor-pointer dark:text-gray-300" routerLink="/login" routerLinkActive="active-link">Login</li>
+                    <li class="cursor-pointer dark:text-gray-300" routerLink="/signup" routerLinkActive="active-link">Register</li>
                 </ng-container>
             </ul>
 
