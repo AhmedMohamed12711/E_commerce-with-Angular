@@ -1,0 +1,92 @@
+<div class="container mx-auto px-4 py-8">
+    <h1 class="text-2xl bg-gradient-to-r from-green-500 to-green-700 text-transparent bg-clip-text font-bold text-center mb-6">Shopping Cart</h1>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <!-- Table Section -->
+        <div class="lg:col-span-2 bg-white p-6 shadow-md rounded-lg dark:bg-gray-800">
+            <div class="relative overflow-x-auto">
+                <table class="w-full text-sm text-left text-grayproduct.product.imageCover-500 dark:text-gray-400">
+                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                        <tr>
+                            <th scope="col" class="px-6 py-3">Product</th>
+                            <th scope="col" class="px-6 py-3">Qty</th>
+                            <th scope="col" class="px-6 py-3">Price</th>
+                            <th scope="col" class="px-6 py-3 text-center">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (product of productList; track $index) {
+                        <tr class="border-b dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                            <td class="flex items-center px-6 py-4 space-x-4">
+                                <img [src]="product.product.imageCover" class="w-16 h-16 rounded-lg shadow"
+                                    [alt]="product.product.title">
+                                <span class="font-medium text-gray-900 dark:text-white">{{ product.product.title }}</span>
+                            </td>
+                            <td class="px-6 py-4">
+                                <div class="flex items-center">
+                                    <button (click)="updateProduct(product.product.id,product.count-1)"
+                                        class="p-2 text-gray-500 bg-gray-200 rounded-full hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-400 dark:hover:bg-gray-600"
+                                        type="button">
+                                        <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                            viewBox="0 0 18 2">
+                                            <path stroke="currentColor" stroke-linecap="round" stroke-width="2"
+                                                d="M1 1h16" />
+                                        </svg>
+                                    </button>
+                                    <input type="number"
+                                        class="mx-2 w-14 text-center border rounded-lg dark:bg-gray-700 dark:text-white"
+                                        [value]="product.count" required />
+                                    <button (click)="updateProduct(product.product._id,product.count+1)"
+                                        class="p-2 text-white bg-green-600 rounded-full hover:bg-green-700 focus:ring-2 focus:ring-green-400"
+                                        type="button">
+                                        <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                            viewBox="0 0 18 18">
+                                            <path stroke="currentColor" stroke-linecap="round" stroke-width="2"
+                                                d="M9 1v16M1 9h16" />
+                                        </svg>
+                                    </button>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 font-medium text-gray-900 dark:text-white">
+                                {{ product.count * product.price }} EGP
+                            </td>
+                            <td class="px-6 py-4 text-center">
+                                <button (click)="deleteProduct(product.product._id)"
+                                    class="text-red-600 hover:text-red-800 dark:text-red-400 dark:hover:text-red-500 font-medium"
+                                    type="button">
+                                    Remove
+                                </button>
+                            </td>
+                            
+                        </tr>
+                        }
+                        <tr *ngIf="productList.length > 0">
+                            <td colspan="4">
+                                <div class="flex justify-end mt-4">
+                                    <button (click)="clearProduct()"
+                                        class="px-4 py-2 text-white bg-red-600 rounded-lg hover:bg-red-700 dark:bg-red-500 dark:hover:bg-red-600 font-medium">
+                                        Clear
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Summary Section -->
+        <div class="bg-white p-6 shadow-md rounded-lg dark:bg-gray-800">
+            <h5 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Order Summary</h5>
+            <div class="flex justify-between text-lg font-medium text-gray-900 dark:text-white mb-6">
+                <span>Total Price:</span>
+                <span class="text-green-600 dark:text-green-400">{{ cartItems.totalCartPrice}} EGP</span>
+            </div>
+            <button  routerLink="/checkout"
+                class="w-full bg-green-600 text-white text-lg font-medium py-3 rounded-lg hover:bg-green-700 focus:ring-4 focus:ring-green-300">
+                Payment Now
+            </button>
+        </div>
+    </div>
+</div>

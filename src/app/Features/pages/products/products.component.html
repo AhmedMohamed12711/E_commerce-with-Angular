@@ -1,0 +1,45 @@
+<section class="md:w-[90%] mx-auto">
+    <div *ngIf="isLoading" class="flex justify-center items-center h-[300px]">
+        <div class="animate-spin rounded-full h-12 w-12 border-t-4 border-green-500 border-solid"></div>
+    </div>
+    <div class="grid grid-cols-2 w-[50%] my-4 "*ngIf="!isLoading">
+            <input 
+            [(ngModel)]="searchValue" 
+            type="text" 
+            class="w-full border border-gray-300 rounded-md focus:border-green-500 focus:ring-2 focus:ring-green-300 transition duration-200 outline-none p-2" 
+            placeholder="Enter category name">
+    </div>
+    <div *ngIf="!isLoading" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 my-8 ">
+        @for (product of productList() | filter :searchValue; track $index) {
+            <div [routerLink]="['/productDetails', product._id]" routerLinkActive="router-link-active"  class="bg-white shadow-lg rounded-xl overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-xl group relative">
+    
+                <!-- Heart Icon -->
+                <div class="absolute top-3 right-3 opacity-0 transition-opacity duration-300 ease-in-out group-hover:opacity-100">
+                    <i 
+                        class="fa fa-heart text-2xl cursor-pointer" (click)="AddToWishlist(product.id)"
+                        [ngClass]="{ 'text-gray-400': !likedProducts[product._id], 'text-red-500': likedProducts[product._id] }"
+                        (click)="toggleLike(product._id, $event) ">
+                    </i>
+                </div>
+    
+                <img [src]="product.imageCover" alt="" class="w-full h-72 object-cover object-center">
+                <div class="p-3 product">
+                    <span class="text-green-500 text-xs font-semibold uppercase">{{ product.category.name }}</span>
+                    <h2 class="text-lg font-semibold text-gray-800 my-2 truncate">{{ product.title | onsale }}</h2>
+                    <div class="flex justify-between items-center mt-3">
+                        <span class="text-lg font-bold text-gray-700">{{ product.price | currency:'EUR' }}</span>
+                        <div class="flex items-center space-x-1">
+                            <i class="fa fa-star text-yellow-400"></i>
+                            <span class="text-gray-700 font-medium">{{ product.ratingsQuantity }}</span>
+                        </div>
+                    </div>
+                    <div class="mt-2 opacity-0 transition-opacity duration-300 ease-in-out group-hover:opacity-100">
+                        <button (click)="addProduct(product.id,$event)" class="w-full bg-green-500 hover:bg-green-600 text-white py-2 rounded-lg text-sm font-medium transition duration-300" >
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</section>

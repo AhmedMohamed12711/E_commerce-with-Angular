@@ -1,0 +1,32 @@
+<div class="container mx-auto w-[90%] p-5 mt-10">
+    <h2 class="text-2xl font-bold text-gray-800 text-center mb-6">Your Wishlist</h2>
+
+    <div class="space-y-6">
+        @for (product of productList(); track $index) {
+            <div class="flex items-center bg-white border border-gray-200 rounded-lg shadow-md p-4 transition-transform duration-300 transform hover:border-green-400">
+                
+                <div class="w-24 h-24 flex-shrink-0">
+                    <img [src]="product.imageCover" 
+                        [alt]="product.title" 
+                        class="w-full h-full object-cover rounded-lg border">
+                </div>
+
+                <div class="flex-1 ml-4">
+                    <h5 class="text-lg font-semibold text-gray-800">{{ product.title.split(' ').slice(0,2).join(' ') }}</h5>
+                    <h6 class="text-green-500 text-md font-bold">{{ product.price }} EGP</h6>
+                </div>
+
+                <div class="flex space-x-4">
+                    <button (click)="deleteProductInWishList(product.id)" class="text-red-500 hover:text-red-700 text-sm flex items-center">
+                        <i class="fa fa-trash mr-1"></i> Remove
+                    </button>
+
+                    <button class="bg-green-500 hover:bg-green-600 text-white px-5 py-2 rounded-lg text-sm font-medium shadow-md transition duration-300"
+                    (click)="addProduct(product.id,$event)">
+                        Add to Cart
+                    </button>
+                </div>
+            </div>
+        }
+    </div>
+</div>

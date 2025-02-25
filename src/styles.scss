@@ -1,1 +1,27 @@
 /* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+body{
+    font-family: "Montserrat", serif;
+}
+::ng-deep .custom-spinner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh; /* يغطي الشاشة بالكامل */
+    background: rgba(0, 0, 0, 0.7); /* خلفية شفافة */
+    border-radius: 10px;
+  }
+  
+  ::ng-deep .loading-text {
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 15px;
+    text-align: center;
+  }
+  

@@ -1,0 +1,18 @@
+<section class="w-[90%] mx-auto my-10 p-5 shadow-lg rounded-lg bg-white dark:bg-gray-900">
+
+
+    <p *ngIf="isLoading" class="text-center text-blue-600 font-semibold">Loading...</p>
+    <p *ngIf="errorMsg" class="text-center text-red-600 font-semibold">{{ errorMsg }}</p>
+
+    <owl-carousel-o *ngIf="CategoryList.length" [options]="customOptions">
+        <ng-container *ngFor="let category of CategoryList">
+            <ng-template carouselSlide [id]="category._id">
+                <div class="text-center p-3 transition-transform duration-300 hover:scale-105">
+                    <img class="h-[200px] mx-auto rounded-lg shadow-md" [src]="category.image" [alt]="category.name"
+                        [title]="category.name">
+                    <p class="mt-2 font-medium text-lg text-gray-700 dark:text-gray-300">{{category.name}}</p>
+                </div>
+            </ng-template>
+        </ng-container>
+    </owl-carousel-o>
+</section>
